@@ -15,11 +15,12 @@ push: null
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
 - prefect.deployments.steps.git_clone:
+    id: clone-step
     repository: https://github.com/Arjunj-keyvalue/train-pipeline.git
     branch: main
     access_token: null
 - prefect.deployments.steps.pip_install_requirements:
-        directory: {{ clone-step.directory }}
+        directory: "{{ clone-step.directory }}" 
         requirements_file: requirements.txt
         stream_output: False
 
@@ -33,7 +34,7 @@ deployments:
   entrypoint: flow.py:perform_training
   parameters: {}
   work_pool:
-    name: train-queue
+    name: test-queue
     work_queue_name: default
 - name: iris-training-docker
   version: null
