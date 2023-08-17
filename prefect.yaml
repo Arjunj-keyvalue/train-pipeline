@@ -18,10 +18,14 @@ pull:
     repository: https://github.com/Arjunj-keyvalue/train-pipeline.git
     branch: main
     access_token: null
+- prefect.deployments.steps.pip_install_requirements:
+        directory: {{ clone-step.directory }}
+        requirements_file: requirements.txt
+        stream_output: False
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
-- name: deployment-1
+- name: iris-training-local
   version: null
   tags: []
   description: null
@@ -30,4 +34,14 @@ deployments:
   parameters: {}
   work_pool:
     name: train-queue
+    work_queue_name: default
+- name: iris-training-docker
+  version: null
+  tags: []
+  description: null
+  schedule: {}
+  entrypoint: flow.py:perform_training
+  parameters: {}
+  work_pool:
+    name: test-container
     work_queue_name: default
