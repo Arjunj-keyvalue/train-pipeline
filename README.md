@@ -21,3 +21,5 @@ Now use the command to start the pool.
 ```shell
 prefect worker start --pool <name>
 ```
+
+To deploy a flow use ```prefect deploy --name iris-training-local <name>``` command and the workflow will be available under deployments
