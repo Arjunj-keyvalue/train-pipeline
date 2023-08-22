@@ -19,7 +19,7 @@ Go to the Prefect UI and go to Work Pools -> + -> Local Subprocess to create a n
 
 Now use the command to start the pool.
 ```shell
-prefect worker start --pool <name>
+prefect worker start --pool test-container
 ```
 
-To deploy a flow use ```prefect deploy --name iris-training-local <name>``` command and the workflow will be available under deployments
+To deploy a flow use ```prefect deploy --name iris-training-local``` command and the workflow will be available under deployments
