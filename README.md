@@ -8,7 +8,7 @@ pip install -U prefect
 ```
 Now to run prefect server run the command ```prefect server start```
  
-In order to create a Prefect config type ```prefect init```. It will create a ```prefect.yaml``` file.
+In order to create a Prefect config, enter ```prefect init``` on terminal. It will create a ```prefect.yaml``` file.
 
 In the ```deployment``` section of yaml add ```name```, ```entrypoint``` and ```work_pool``` ```name``` and 
 ```work_queue_name```
