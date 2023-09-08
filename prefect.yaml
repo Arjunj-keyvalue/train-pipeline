@@ -26,7 +26,7 @@ pull:
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
-- name: iris-training-local
+- name: iris-training-local-deployment
   version: null
   tags: []
   description: null
@@ -45,4 +45,14 @@ deployments:
   parameters: {}
   work_pool:
     name: test-container
+    work_queue_name: default
+- name: iris-training-ecs
+  version: null
+  tags: []
+  description: null
+  schedule: {}
+  entrypoint: flow.py:perform_training
+  parameters: {}
+  work_pool:
+    name: ecs-worker
     work_queue_name: default
