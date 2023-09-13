@@ -46,3 +46,13 @@ deployments:
   work_pool:
     name: test-container
     work_queue_name: default
+- name: iris-training-ecs-push
+  version: null
+  tags: []
+  description: null
+  schedule: {}
+  entrypoint: flow.py:perform_training
+  parameters: {}
+  work_pool:
+    name: test-ecs-push
+    work_queue_name: default
