@@ -18,7 +18,7 @@ pull:
     id: clone-step
     repository: https://github.com/Arjunj-keyvalue/train-pipeline.git
     branch: main
-    access_token: null
+    access_token: "{{ prefect.blocks.secret.github-access-token }}"
 - prefect.deployments.steps.pip_install_requirements:
         directory: "{{ clone-step.directory }}" 
         requirements_file: requirements.txt
