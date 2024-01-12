@@ -19,28 +19,28 @@ def load_data() -> DataFrame:
 
 @task(name="Train Model")
 def train_model(data, experiment_name):
-    train(data, experiment_name, variables.get("mlflow_server"))
+    return train(data, experiment_name, variables.get("mlflow_server"))
 
 
 @task
-def my_fn():
+def record_acc(train_acc, test_acc):
     highest_churn_possibility = [
-       {'customer_id':'12345', 'name': 'John Smith', 'churn_probability': 0.85 }, 
-       {'customer_id':'56789', 'name': 'Jane Jones', 'churn_probability': 0.65 } 
+       {'data':'Train', 'accuracy': train_acc }, 
+       {'data':'Test', 'accuracy': test_acc } 
     ]
 
     create_table_artifact(
-        key="personalized-reachout",
+        key="train-metrics",
         table=highest_churn_possibility,
-        description= "# Marvin, please reach out to these customers today!"
+        description= "# Metrics"
     )
 
 
 @flow(name="Train IRIS Model")
 def perform_training(experiment_name):
     data = load_data()
-    train_model(data, experiment_name)
-    my_fn()
+    train_acc, test_acc = train_model(data, experiment_name)
+    record_acc(train_acc, test_acc)
 
 
 if __name__ == "__main__":

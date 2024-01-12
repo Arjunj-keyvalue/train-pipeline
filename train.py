@@ -33,14 +33,18 @@ def train(data, experiment_name, tracking_uri):
         model.fit(train_X, train_y)
         prediction = model.predict(test_X)
         
-        acc = metrics.accuracy_score(prediction, test_y)
-        print("Training Complete with accuracy: ", acc)
+        test_acc = metrics.accuracy_score(prediction, test_y)
+        print("Training Complete with accuracy: ", test_acc)
 
-        mlflow.log_metric("training data accuracy", acc)
+        prediction = model.predict(train_X)
+        
+        train_acc = metrics.accuracy_score(prediction, train_y)
+        mlflow.log_metric("training data accuracy", train_acc)
         mlflow.sklearn.log_model(model, artifact_path="intent-model")
         # mlflow.log_artifact(data_csv, artifact_path="features")
+    return train_acc, test_acc
 
 
 if __name__ == "__main__":
     data = load_dataset()
-    train(data=data)
+    train(data, "", "")
